@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Automa Essay Correction</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</head>
+
+{% if sucesss %}
+<script>
+    alert('The system has been trained successfully for the given array')
+</script>
+{% endif %}
+<body>
+    <p class="page-title">Automatic Essay Corrector</p>
+    <div class="container wrapper">
+        <p>Upload your Essays to get your score</p>
+        <div class="container">
+            <div class="row" style="width:inherit; text-align:center;">
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="col-sm-8 col-md-8">
+                        <!-- image-preview-filename input [CUT FROM HERE]-->
+                        <div class="input-group image-preview">
+                            <input type="text" class="form-control image-preview-filename" disabled="disabled">
+                            <!-- don't give a name === doesn't send on POST/GET -->
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                                    <span class="glyphicon glyphicon-remove"></span> Clear
+                                </button>
+                                <div class="btn btn-default image-preview-input">
+                                    <span class="glyphicon glyphicon-folder-open"></span>
+                                    <span class="image-preview-input-title">Browse</span>
+                                    <input type="file" accept=".txt" name="file" /> <!-- rename it -->
+                                </div>
+                            </span>
+                        </div><!-- /input-group image-preview [TO HERE]-->
+                        <div class="set-input">
+                            <p>Enter Set Id</p>
+                            <input type="text" name="set" class="form-control" id="usr">
+                        </div>
+                        <button style="margin:30px 0px;" type="submit" class="btn btn-primary">Submit</button>
+                        <div></div><a class="link-to-trainer" href="{{ url_for('trainer') }}">Click here to train your
+                            own sets of essays</a>
+                    </div>
+            </div>
+            </form>
+            {% if score %}
+            <div class="col-sm-8 col-md-8 container">
+                <h3>Your Score :</h3>
+                <p>{{ score }}/25</p>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+    </div>
+    </div>
+</body>
